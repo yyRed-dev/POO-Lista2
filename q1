@@ -1,0 +1,82 @@
+// Em um sistema de controle de acesso de um evento, é necessário contar o número de pessoas que entram em uma sala. Implemente uma classe Contador em Java,
+// responsável por encapsular um valor que representa o total de ocorrências. A classe deve oferecer métodos para:
+// a) Zerar o contador; b) Incrementar o valor; c) Retornar o valor atual do contador.
+
+import java.util.Scanner;
+public class Main {
+	
+	private Scanner sc = new Scanner(System.in);
+	
+	public static void main(String[] args) {
+	
+		System.out.println("--------------------------------------------");
+		System.out.println("Bem vindo ao Contador de pessoas do Evento!");
+		
+		Contador c1 = new Contador(10);
+		Contador c2 = new Contador(25);
+		
+		System.out.println("\nTotal de Participantes \nEvento 1: " + c1.getPessoas() + "\nEvento 2: " + c2.getPessoas());
+		
+		System.out.println("\nManipulações para testar funcionalidade.\n Aumentaremos o total de participantes do Evento 1 em 10 e reduziremos os do Evento 2 em 15.");
+	
+		//Loops, forma numero 1 de fazre a alteração
+		for (int i=0; i<10; i++) {
+			c1.aumentarContador();
+		}
+		
+		for (int j=0; j<15; j++) {
+			c2.reduzirContador();
+		}
+		
+		System.out.println("\nTotal de Participantes \nEvento 1: " + c1.getPessoas() + "\nEvento 2: " + c2.getPessoas());
+		System.out.println("\nAgora vamo colocar os dois valores como 0, e então iremos voltar para os valores originais de 10 e 25 (respectivamente).");
+		
+		c1.zerarContador();
+		c2.zerarContador();
+		
+		System.out.println("\nTotal de Participantes \nEvento 1: " + c1.getPessoas() + "\nEvento 2: " + c2.getPessoas()+ "\n");
+		
+		c1.setPessoas(10);
+		c2.setPessoas(25);
+		
+		System.out.println("\nTotal de Participantes \nEvento 1: " + c1.getPessoas() + "\nEvento 2: " + c2.getPessoas());
+		
+	}
+}
+
+class Contador {
+
+	private int pessoas;
+	
+	//constructor
+	public Contador(int pessoas) {
+		this.pessoas = pessoas;
+	}
+	
+	
+	//get & set
+	public int getPessoas() {
+		return pessoas;
+	}
+	public void setPessoas(int pessoas) {
+		this.pessoas = pessoas;
+	}
+	
+	
+	//increase & decrease counter
+	public void aumentarContador() {
+		this.pessoas++;
+	}
+	public void reduzirContador() {
+		this.pessoas--;
+		if (this.pessoas < 0) {
+			this.pessoas = 0;
+		}
+	}
+	
+	
+	//turn counter to Zero
+	public void zerarContador() {
+		this.pessoas = 0;
+	}
+}
