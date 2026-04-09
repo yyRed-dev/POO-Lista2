@@ -1,0 +1,47 @@
+package Questão_2;
+
+public class Ponto2D {
+
+	double x;
+	double y;
+
+	
+	// Constructors
+	public Ponto2D() {
+		x = 0;
+		y = 0;
+	}
+	public Ponto2D(double x, double y) {
+		this.x = x;
+		this.y = y;
+	}
+	public Ponto2D(Ponto2D outroPonto2D) {
+		this.x = outroPonto2D.x;
+		this.y = outroPonto2D.y;
+	}
+	
+	//getters
+	public double getX(double x) {
+		return x;
+	}
+	public double getY(double y) {
+		return y;
+	}
+	
+	//setters
+	public void setX(double x) {
+		this.x = x;
+	}
+	public void setY(double y) {
+		this.y = y;
+	}
+	
+	// Method Equals
+	@Override
+	public boolean equals() {
+	}
+	
+	// Method to calculate distance between two dots
+	public boolean calcDist() {
+	}
+}
