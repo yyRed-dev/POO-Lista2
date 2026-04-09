@@ -3,9 +3,7 @@
 // a) Zerar o contador; b) Incrementar o valor; c) Retornar o valor atual do contador. 
 
 public class Main {
-	
-	//private Scanner sc = new Scanner(System.in);
-	
+
 	public static void main(String[] args) {
 	
 		System.out.println("--------------------------------------------");
