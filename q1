@@ -1,11 +1,10 @@
 // Em um sistema de controle de acesso de um evento, é necessário contar o número de pessoas que entram em uma sala. Implemente uma classe Contador em Java,
 // responsável por encapsular um valor que representa o total de ocorrências. A classe deve oferecer métodos para:
-// a) Zerar o contador; b) Incrementar o valor; c) Retornar o valor atual do contador.
+// a) Zerar o contador; b) Incrementar o valor; c) Retornar o valor atual do contador. 
 
-import java.util.Scanner;
 public class Main {
 	
-	private Scanner sc = new Scanner(System.in);
+	//private Scanner sc = new Scanner(System.in);
 	
 	public static void main(String[] args) {
 	
@@ -19,7 +18,7 @@ public class Main {
 		
 		System.out.println("\nManipulações para testar funcionalidade.\n Aumentaremos o total de participantes do Evento 1 em 10 e reduziremos os do Evento 2 em 15.");
 	
-		//Loops, forma numero 1 de fazre a alteração
+		//Loops, forma numero 1 de fazer a alteração
 		for (int i=0; i<10; i++) {
 			c1.aumentarContador();
 		}
