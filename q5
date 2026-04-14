@@ -1,0 +1,88 @@
+package q5;
+import java.util.Scanner;
+
+public class Main {
+	private static Scanner sc;
+	public static void main(String[] args) {
+		
+		sc = new Scanner(System.in);
+		
+		Pais p1 = new Pais("BR", "Brasil", 10);
+		Pais p2 = new Pais("AR", "Argentina", 15);
+		Pais p3 = new Pais("BR", "Belgica", 20);
+		
+		System.out.println("Nome: " + p1.getNome()+"\nISO: " + p1.getIso() + "\nPopulacao:" + p1.getPopulacao() + "\n");
+		System.out.println("Nome: " + p2.getNome()+"\nISO: " + p2.getIso() + "\nPopulacao:" + p2.getPopulacao() + "\n");
+		System.out.println("Nome: " + p3.getNome()+"\nISO: " + p3.getIso() + "\nPopulacao:" + p3.getPopulacao() + "\n");
+		
+		
+		System.out.println("O P1 e P2 são iguais?");
+		System.out.println(p1.equals(p2));
+		
+		System.out.println("O P1 e P3 são iguais?");
+		System.out.println(p1.equals(p3));
+		
+		System.out.println("O P2 e P3 são iguais?");
+		System.out.println(p2.equals(p3));
+		
+	}
+}
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class Pais {
+
+	private String iso;
+	private String nome;
+	private int populacao;
+	private double dimensoes;
+	private Map<String, String> paisesVizinhos = new HashMap<>();
+	
+	// Constructor
+	public Pais (String iso, String nome, int populacao) {
+		this.iso = iso;
+		this.nome = nome;
+		this.populacao = populacao;
+	}
+	
+	// Get & Set
+	public String getIso() {
+		return iso;
+	}
+	public void setIso(String iso) {
+		this.iso = iso;
+	}
+	
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public int getPopulacao() {
+		return populacao;
+	}
+	public void setPopulacao(int populacao) {
+		this.populacao = populacao;
+	}
+	
+	// Methods
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null && !(obj instanceof Pais)) {
+			return false;
+		}
+	
+		Pais outro = (Pais) obj;
+		return this.iso.equals(outro.iso);
+	}
+	
+	public double densiPop() {
+		return (this.populacao/this.dimensoes);
+	}
+}
