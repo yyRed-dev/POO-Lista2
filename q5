@@ -1,32 +1,76 @@
 package Questao_5;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Main {
 	private static Scanner sc;
 	public static void main(String[] args) {
 		
 		sc = new Scanner(System.in);
+		ArrayList<Pais> lista = new ArrayList<>();
 		
+		/*
 		Pais p1 = new Pais("BR", "Brasil", 10);
 		Pais p2 = new Pais("AR", "Argentina", 15);
 		Pais p3 = new Pais("BR", "Belgica", 20);
+		*/
 		
-		System.out.println("Nome: " + p1.getNome()+"\nISO: " + p1.getIso() + "\nPopulacao:" + p1.getPopulacao() + "\n");
-		System.out.println("Nome: " + p2.getNome()+"\nISO: " + p2.getIso() + "\nPopulacao:" + p2.getPopulacao() + "\n");
-		System.out.println("Nome: " + p3.getNome()+"\nISO: " + p3.getIso() + "\nPopulacao:" + p3.getPopulacao() + "\n");
+		int opcao = -1;
+		boolean repetido = false;
+		
+		while(opcao != 0) {
+			System.out.println("1 - Adicionar um Pais.");
+			System.out.println("0 - Finalizar.");
 		
 		
-		System.out.println("O P1 e P2 são iguais?");
-		System.out.println(p1.equals(p2));
+			opcao = sc.nextInt();
 		
-		System.out.println("O P1 e P3 são iguais?");
-		System.out.println(p1.equals(p3));
-		
-		System.out.println("O P2 e P3 são iguais?");
-		System.out.println(p2.equals(p3));
-		
+			switch (opcao) {
+			case 1:
+			    String iso;
+			    
+			    while (true) {
+			        repetido = false;
+
+			        System.out.println("ISO (Sigla de 2 letras):");
+			        iso = sc.next().toUpperCase();
+
+			        for (int x = 0; x < lista.size(); x++) {
+			            if (lista.get(x).getIso().equals(iso)) {
+			                repetido = true;
+			                break;
+			            }
+			        }
+
+			        if (repetido) {
+			            System.out.println("ISO já existe! Digite outro.");
+			        } else {
+			            break;
+			        }
+			    }
+
+			    sc.nextLine();
+
+			    System.out.println("Nome do Pais:");
+			    String nome = sc.nextLine();
+
+			    System.out.println("População:");
+			    int populacao = sc.nextInt();
+
+			    Pais obj = new Pais(iso, nome, populacao);
+			    lista.add(obj);
+
+			    System.out.println("Novo pais adicionado!");
+			    break;
+					
+				case 0:
+					break;
+			}
+		}
 	}
 }
+
+package Questao_5;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -74,7 +118,7 @@ public class Pais {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null && !(obj instanceof Pais)) {
+		if (obj == null || !(obj instanceof Pais)) {
 			return false;
 		}
 	
