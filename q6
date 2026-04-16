@@ -1,0 +1,89 @@
+package Questao_6;
+import java.util.Scanner;
+
+public class Main {
+	private static Scanner sc;
+	public static void main(String[] args) {
+
+		// sc = new Scanner(System.in);
+		
+		Pessoa p1 = new Pessoa("Jorge");
+		Pessoa p2 = new Pessoa("Jorge", "Andressa", "Miguel");
+		Pessoa p3 = new Pessoa("Jorge", "Andressa", "Wagner");
+		
+		
+		System.out.println("Teste de Pessoas:");
+		System.out.println("Pessoa 1:" + p1.getNome() + "| Nome Mae: "  + p1.getNomeMae() + " | Nome Pai: " + p1.getNomePai() );
+		System.out.println("Pessoa 1:" + p2.getNome() + "| Nome Mae: "  + p2.getNomeMae() + " | Nome Pai: " + p2.getNomePai() );
+		System.out.println("Pessoa 1:" + p3.getNome() + "| Nome Mae: "  + p3.getNomeMae() + " | Nome Pai: " + p3.getNomePai() );
+		
+		System.out.println("Teste de Igualdade:");
+		System.out.println("A pessoa 2 e 3 são a mesma?:" + p2.equals(p3));
+		
+	}
+}
+
+package Questao_6;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Pessoa {
+	
+	private String nome;
+	private String nomeMae;
+	private String nomePai;
+	
+	Map<String , String> listaPessoas = new HashMap<>();
+	
+	// constructors
+	public Pessoa(String nome, String nomeMae, String nomePai){
+		this.nome = nome;
+		this.nomeMae = nomeMae;
+		this.nomePai = nomePai;
+	}
+	public Pessoa(String nome) {
+		this.nome = nome;
+	}
+	
+	// get e set
+	public String getNome(){
+		return nome;
+	}
+	public void setNome(String nome){
+		this.nome = nome;
+	}
+	
+	public String getNomeMae(){
+		return nomeMae;
+	}
+	public void setNomeMae(String nomeMae){
+		this.nomeMae = nomeMae;
+	}
+	
+	public String getNomePai(){
+		return nomePai;
+	}
+	public void setNomePai(){
+		this.nomePai = nomePai;
+	}
+	
+	// Metodo de igualdade semântica
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null || !(obj instanceof Pessoa)) {
+			return false;
+		}
+		
+		Pessoa outro = (Pessoa) obj;
+		
+		if (this.nome.equals(outro.nome) == true && this.nomeMae.equals(outro.nomeMae) == true) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+}
