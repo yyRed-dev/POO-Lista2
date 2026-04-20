@@ -303,7 +303,7 @@ public class Ponto2D {
 		this.y = y;
 	}
 	
-	// Methodo Equals
+	// Metodo Equals
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
