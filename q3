@@ -1,0 +1,325 @@
+package Questao_3;
+import java.util.Scanner;
+
+	/* Um engenheiro civil deseja criar um programa para analisar a interseção de retas em um plano.
+	Crie uma classe que represente uma reta (y = ax + b), oferecendo:
+		a) Construtores:
+			i) Com coeficiente angular e coeficiente linear;
+			ii) A partir de dois pontos distintos.
+		b) Métodos de acesso para os coeficientes;
+		c) Método para verificar se um ponto pertence à reta;
+		d) Método que, dada outra reta, retorne o ponto de interseção ou null se forem paralelas. */
+
+public class Main {
+	private static Scanner sc;
+	
+	public static void main(String[] args) {
+		
+		sc = new Scanner(System.in);
+		
+		Linha linha1 = null;
+		Linha linha2 = null;
+		
+		int opcao = -1;
+		int continuar = -1;
+		double x, y, cfAngular, cfLinear;
+		
+		try {
+			System.out.println("Bem vindo ao sistema de Linhas:");
+			System.out.println("Para começar-mos o uso do programa é necessario criar uma Linha.");
+			System.out.println("Deja criar uma Linha? (1-Sim / 0-Nao)");
+			
+			opcao = sc.nextInt();
+			
+			switch (opcao) {
+				case 1:
+					System.out.println("Como deseja criar essa Linha? (1-Pela Equacao / 2-Por 2 pontos / 0-Finalizar)");
+					int subOpcao = sc.nextInt();
+					
+						if (subOpcao == 1) {
+							System.out.println("Para definir a Linha por sua Equacao, por favor informe seus Coeficientes Angular e Linear (Respectivamente)");
+							System.out.print("Coeficiente Angular da Reta: ");
+							
+							cfAngular = sc.nextDouble();
+							
+							System.out.print("Coeficiente Linear da Reta: ");
+							cfLinear = sc.nextDouble();
+							
+							linha1 = new Linha(cfAngular, cfLinear);
+							System.out.println("Linha criada com sucesso!");
+							
+						}
+						else if (subOpcao == 2) {
+							System.out.println("Informe os dados dos do Ponto 1 (X e Y):");
+							System.out.print("X do Ponto 1:");
+							x = sc.nextDouble();
+							
+							System.out.print("Y do Ponto 1:");
+							y = sc.nextDouble();
+							
+							Ponto2D p1 = new Ponto2D(x, y);
+							
+							System.out.println("Informe os dados dos do Ponto 2 (X e Y):");
+							System.out.print("X do Ponto 2:");
+							x = sc.nextDouble();
+							
+							System.out.print("Y do Ponto 2:");
+							y = sc.nextDouble();
+							
+							Ponto2D p2 = new Ponto2D(x, y);
+							linha1 = new Linha(p1, p2);
+						}
+						else if (subOpcao != 1 || subOpcao != 2) {
+							System.out.println("Finalizando o programa. Obrigado por utilizar!");
+							continuar = 0;
+							break;
+						}
+						break;
+						
+				case 0:
+					continuar = 0;
+					System.out.println("Encerrando programa. Obrigado por utilizar!");
+					break;
+
+				default:
+					continuar = 0;
+					System.out.println("Entrada Invalida! Finalizando o programa, por favor tente novamente.");
+					break;
+			}
+			
+			while (continuar != 0) {
+				
+			System.out.println("Deseja realizar alguma operação? \n1- Verificar se um Ponto pertence a reta.\n2- Descobrir ponto de interseçaõ entre duas retas. \n0- Finalizar.");
+			opcao = sc.nextInt();
+				
+				switch (opcao) {
+					case 1:
+						System.out.println("Informe as coordenadas cartesianas (X e Y) do ponto que deseja testar.");
+						System.out.print("X do Ponto: ");
+						x = sc.nextInt();
+					
+						System.out.print("Y do Ponto: ");
+						y = sc.nextInt();
+					
+						Ponto2D p3 = new Ponto2D(x, y);
+					
+						if (linha1.pertence(p3) == true) {
+							System.out.println("Esse ponto passa dentro da Linha existente!");
+						} else {
+							System.out.println("Esse ponto não passa dentro da Linha existente...");
+						}
+					
+						System.out.println("Deseja continuar? (1- Sim / 0- Não.)");
+						continuar = sc.nextInt();
+						break;
+					
+					case 2:
+						System.out.println("Para realizar a comparação precisamos criar uma nova Linha!");
+						System.out.println("Como deseja criar essa Linha? (1-Pela Equacao / 2-Por 2 pontos)");
+						int subOpcao = sc.nextInt();
+						
+							if (subOpcao == 1) {
+								System.out.println("Para definir a Linha por sua Equacao, por favor informe seus Coeficientes Angular e Linear (Respectivamente)");
+								System.out.print("Coeficiente Angular da Reta: ");
+								
+								cfAngular = sc.nextDouble();
+								
+								System.out.print("Coeficiente Linear da Reta: ");
+								cfLinear = sc.nextDouble();
+								
+								linha2 = new Linha(cfAngular, cfLinear);
+								System.out.println("Linha criada com sucesso!");
+								
+							}
+							else if (subOpcao == 2) {
+								System.out.println("Informe os dados dos do Ponto 1 (X e Y):");
+								System.out.print("X do Ponto 1:");
+								x = sc.nextDouble();
+								
+								System.out.print("Y do Ponto 1:");
+								y = sc.nextDouble();
+								
+								Ponto2D p4 = new Ponto2D(x, y);
+								
+								System.out.println("Informe os dados dos do Ponto 2 (X e Y):");
+								System.out.print("X do Ponto 2:");
+								x = sc.nextDouble();
+								
+								System.out.print("Y do Ponto 2:");
+								y = sc.nextDouble();
+								
+								Ponto2D p5 = new Ponto2D(x, y);
+								linha2 = new Linha(p4, p5);
+							}
+							else if (subOpcao != 1 || subOpcao != 2) {
+								System.out.println("Entrada invalida! Finalizando programa.");
+								break;
+							}
+							
+							Ponto2D intersecao = linha1.intersecao(linha2);
+							
+							if (intersecao != null) {
+								System.out.println("Intersecão encontrada!");
+								System.out.println("X: "+ intersecao.getX() + " Y: " + intersecao.getY());
+							}
+							else {
+								if (linha1.getCfAngular() == linha2.getCfAngular() && linha1.getCfLinear() == linha2.getCfLinear()) {
+									System.out.println("As retas são iguais! Elas possuem infinitos pontos em comum.");
+								}
+								else {
+									System.out.print("As retas são paralelas! Não possuem nenhum ponto em comum.");
+								}
+							}
+							System.out.println("Deseja continuar? (1- Sim / 0- Não.)");
+							continuar = sc.nextInt();
+							break;
+
+					case 0:
+						System.out.println("Encerrando programa. Obrigado por utilizar!");
+						break;
+					
+					default:
+						System.out.println("Entrada Invalida! Finalizando o programa, por favor tente novamente.");
+						break;
+				}
+			}
+		}		// fim do try é aqui
+
+		catch (java.util.InputMismatchException erro) {
+			System.out.println("Entrada invalida. Por favor, digite apenas numeros!");
+		}
+		
+		catch (Exception erro) {
+			System.out.println("Um Erro desconhecido Ocorreu! \nCodigo do Erro: " + erro.getMessage());
+		}
+	}
+}
+
+package Questao_3;
+
+public class Linha{
+	
+	/*	reta (y = ax + b)
+		coef angular = a
+		coef linear = b */
+
+	double cfAngular;
+	double cfLinear;
+
+	// contrutores
+	public Linha(double cfAgular, double cfLinear) {
+		this.cfAngular = cfAgular;
+		this.cfLinear = cfLinear;
+	}
+
+	// a = (y2 - y1) / (x2 - x1)  [cfAngular]  b = y - mx [cfLinear]
+	public Linha(Ponto2D p1, Ponto2D p2) {
+		double a = (p2.getY() - p1.getY()) / (p2.getX() - p1.getX());
+		double b = p1.getY() - a * p1.getX();
+		
+		this.cfAngular = a;
+		this.cfLinear = b;
+	}
+
+	// get & set
+	public double getCfAngular() {
+		return cfAngular;
+	}
+	public double getCfLinear() {
+		return cfLinear;
+	}
+	public void setCfAngular(double cfAngular) {
+		this.cfAngular = cfAngular;
+	}
+	public void setCfLinear(double cfLinear) {
+		this.cfLinear = cfLinear;
+	}
+
+	/*	metodo verificar se ponto pertence a reta
+		Calcular se x e o y existem dentro da reta com o coef angular e linear */
+
+	public boolean pertence(Ponto2D ponto) {
+		if (ponto.getY() == (cfAngular * ponto.getX() + cfLinear)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	/*	metodo ponto de interseção entre 2 linhas
+		x = (b2 - b1) / (a1 - a2)	*/
+	public Ponto2D intersecao(Object obj) {
+		
+		if (obj == null || !(obj instanceof Linha)) {
+			return null;
+		}
+		
+		Linha outra = (Linha) obj;
+		
+		if (this.cfAngular == outra.cfAngular) {
+			return null;
+		}
+		
+		double x = (outra.cfLinear - this.cfLinear) / (this.cfAngular - outra.cfAngular);
+		double y = this.cfAngular * x + this.cfLinear;
+		
+		return new Ponto2D(x, y);
+	}
+}
+
+package Questao_3;
+
+public class Ponto2D {
+
+	double x;
+	double y;
+
+
+	// Construtores
+	public Ponto2D() {
+		x = 0;
+		y = 0;
+	}
+	public Ponto2D(double x, double y) {
+		this.x = x;
+		this.y = y;
+	}
+	public Ponto2D(Ponto2D outroPonto2D) {
+		this.x = outroPonto2D.x;
+		this.y = outroPonto2D.y;
+	}
+	
+	//get & set
+	public double getX() {
+		return x;
+	}
+	public double getY() {
+		return y;
+	}
+	public void setX(double x) {
+		this.x = x;
+	}
+	public void setY(double y) {
+		this.y = y;
+	}
+	
+	// Methodo Equals
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null || !(obj instanceof Ponto2D)) {
+			return false;
+		}
+		
+		Ponto2D outro = (Ponto2D) obj;
+		
+		return this.x == outro.x && this.y == outro.y;
+	}
+	
+	// Calcular distancia entre 2 pontos
+	public double calcDist(Ponto2D outro) {
+		return Math.sqrt((outro.x - this.x)*(outro.x - this.x) + (outro.y - this.y)*(outro.y - this.y));
+	}
+}
