@@ -1,0 +1,230 @@
+package Questao_4;
+import java.util.Scanner;
+
+/*	Um aplicativo de design gráfico precisa manipular formas geométricas básicas.
+	Implemente uma classe Circulo no plano cartesiano, com:
+		a) Construtor que receba o raio e o centro do círculo (como um ponto);
+		b) Construtor que receba apenas o raio e posicione o círculo na origem;
+		c) Métodos de acesso ao raio;
+		d) Métodos inflar() e desinflar() para alterar o tamanho;
+		e) Método que retorne a área do círculo. */
+
+public class Main {
+	private static Scanner sc;
+	
+	public static void main (String[] args) {
+		
+		sc = new Scanner(System.in);
+		double raio, x, y, aux;
+		int opcao;
+		int continuar = -1;
+		
+		Circulo c1 = null;
+		
+		try {
+			
+			System.out.println("Bem-vindo ao App de Design Digital.");
+			System.out.println("Deseja começar? (1- Sim / 0- Não)");
+			opcao = sc.nextInt();
+			
+			// criando o círculo
+			switch (opcao) {
+				case 1:
+					System.out.println("Para iniciarmos, é necessário criar um círculo!");
+					System.out.println("Como deseja criá-lo? (1- Pelo raio e centro / 2- Apenas raio / 0- Finalizar");
+
+					int subOpcao = sc.nextInt();
+					if (subOpcao == 1) {
+						System.out.print("Valor do raio do círculo: ");
+						raio = sc.nextDouble();
+						
+						System.out.print("Valor do ponto X do círculo: ");
+						x = sc.nextDouble();
+						
+						System.out.print("Valor do ponto Y do círculo: ");
+						y = sc.nextDouble();
+						
+						Ponto2D p1 = new Ponto2D(x, y);
+						c1 = new Circulo(raio, p1);
+						
+						System.out.println("Círculo criado com sucesso!");
+						
+					}
+					else if (subOpcao == 2) {
+						System.out.print("Valor do raio do círculo: ");
+						raio = sc.nextDouble();
+
+						c1 = new Circulo(raio);
+						
+						System.out.println("Círculo criado com sucesso!");
+					}
+					else if (subOpcao == 0) {
+						System.out.println("Finalizando. Obrigado por utilizar.");
+					} else {
+						System.out.println("Digite apenas números! Encerrando o programa, por favor tente novamente.");
+					}
+					
+					while (continuar != 0) {
+
+						System.out.println("Deseja realizar alguma operação? \n1- Inflar círculo (aumentar)\n2- Desinflar círculo (reduzir)\n3- Calcular área\n0- Finalizar.");
+						
+						opcao = sc.nextInt();
+						switch (opcao) {
+							case 1:
+								System.out.println("Quanto você deseja aumentar no círculo? (apenas números inteiros)");
+								aux = sc.nextInt();
+								if (c1 != null) {
+									c1.inflar(aux);
+								}
+
+								System.out.println("Círculo incrementado com sucesso!");
+								System.out.println("Deseja continuar? (1- Sim / 0- Não)");
+								continuar = sc.nextInt();
+								break;
+
+							case 2:
+								System.out.println("Quanto você deseja reduzir o círculo? (apenas números inteiros)");
+								aux = sc.nextInt();
+								if (c1 != null) {
+									c1.desinflar(aux);
+								}
+
+								System.out.println("Círculo reduzido com sucesso!");
+								System.out.println("Deseja continuar? (1- Sim / 0- Não)");
+								continuar = sc.nextInt();
+								break;
+
+							case 3:
+								// calc área
+								System.out.printf("Área do círculo: %.2f\n", c1.area(c1.getRaio()));
+
+								System.out.println("\nDeseja continuar? (1- Sim / 0- Não)");
+								continuar = sc.nextInt();
+								break;
+
+							case 0:
+								System.out.println("Finalizando programa. Obrigado por utilizar!");
+								break;
+
+							default:
+								System.out.println("Erro desconhecido. Por favor, reinicie o programa.");
+								break;
+						}
+					}
+					
+				case 0:
+					System.out.println("Finalizando programa. Obrigado por utilizar.");
+					break;
+					
+				default:
+					System.out.println("Um erro desconhecido ocorreu.");
+					break;
+			}
+		} // fim do try
+		
+		catch (java.util.InputMismatchException erro) {
+			System.out.println("Entrada inválida. Por favor, digite apenas números inteiros!");
+		}
+		catch (Exception erro) {
+			System.out.println("Um erro desconhecido ocorreu! \nCódigo do erro: " + erro.getMessage());
+		}
+	}
+}
+
+package Questao_4;
+
+public class Circulo {
+	
+	double raio;
+	Ponto2D centro;
+	
+	// contrutores
+	public Circulo(double raio, Ponto2D centro) {
+		this.raio = raio;
+		this.centro = new Ponto2D(centro.x, centro.y);
+	}
+	public Circulo(double raio) {
+		this.raio = raio;
+		this.centro = new Ponto2D(0, 0);
+	}
+	
+	// get & set
+	public double getRaio() {
+		return raio;
+	}
+	public void setRaio(double raio) {
+		this.raio = raio;
+	}
+	
+	// metodos do circulo
+	// area = 3.14 * raio * raio
+	public double area(double raio) {
+		return (3.14 * this.raio * this.raio);
+	}
+	
+	// (des)inflar vai aumentar/diminuir o raio do circulo
+	public double inflar(double valor) {
+		return this.raio += valor;
+	}
+
+	public double desinflar(double valor) {
+		return this.raio -= valor;
+	}
+
+}
+
+package Questao_4;
+
+public class Ponto2D {
+
+	double x;
+	double y;
+
+	// Construtores
+	public Ponto2D() {
+		x = 0;
+		y = 0;
+	}
+	public Ponto2D(double x, double y) {
+		this.x = x;
+		this.y = y;
+	}
+	public Ponto2D(Ponto2D outroPonto2D) {
+		this.x = outroPonto2D.x;
+		this.y = outroPonto2D.y;
+	}
+	
+	//get & set
+	public double getX() {
+		return x;
+	}
+	public double getY() {
+		return y;
+	}
+	public void setX(double x) {
+		this.x = x;
+	}
+	public void setY(double y) {
+		this.y = y;
+	}
+	
+	// Metodo Equals
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null || !(obj instanceof Ponto2D)) {
+			return false;
+		}
+		
+		Ponto2D outro = (Ponto2D) obj;
+		
+		return this.x == outro.x && this.y == outro.y;
+	}
+	
+	// Calcular distancia entre 2 pontos
+	public double calcDist(Ponto2D outro) {
+		return Math.sqrt((outro.x - this.x)*(outro.x - this.x) + (outro.y - this.y)*(outro.y - this.y));
+	}
+}
