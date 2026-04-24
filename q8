@@ -1,0 +1,749 @@
+package Questao_8;
+import java.util.Scanner;
+
+public class Main {
+	
+	private static Scanner sc;
+	public static void main(String[] args) {
+		
+		sc = new Scanner(System.in);
+		
+		try {
+			
+			int opcao, subOpcao = -1;
+			
+			int continuar = -1;
+			int linhas, colunas;
+			
+			while(continuar !=0) {
+				
+				System.out.println("Bem vindo ao sistema de Operações com Matrizes!");
+				
+				System.out.println("Deseja começar o uso do Programa? (1-Sim | 0-Não)");
+				continuar = sc.nextInt();
+				
+				if (continuar == 0) {
+					System.out.println("Finalizando o programa...");
+					System.out.println("Obrigado por utilizar!");
+					break;
+				}
+				
+				System.out.println("\nPara podermos começar, é preciso uma Matriz seja criada!");
+				System.out.print("Numero de Linhas da Matriz: ");
+				linhas = sc.nextInt();
+				
+				while(linhas<1) {
+					System.out.print("Por favor, insira um valor maior que 0 para as Linhas: ");
+					linhas = sc.nextInt();
+				}
+				
+				
+				System.out.print("Numero de Colunas da Matriz: ");
+				colunas = sc.nextInt();
+					
+				while(colunas<1) {
+					System.out.print("Por favor, insira um valor maior que 0 para as Colunas: ");
+					colunas = sc.nextInt();
+				}
+				
+				
+				Matriz m1 = new Matriz(linhas,colunas);
+				
+				System.out.println("Agora é preciso definir os valores dos " + linhas*colunas + " elementos da Matriz.");
+				
+				for (int i=0; i<linhas; i++) {
+					for (int j=0; j<colunas; j++) {
+						
+						System.out.print("Valor do Elemento (Linha " + (i+1) + " | Coluna "+ (j+1) +"): ");
+						m1.setElemento(i, j, sc.nextDouble());
+					}
+				}
+				
+				System.out.println("Todos os Elementos foram definidos com sucesso. Matriz criada!");
+				System.out.println("Sua Matriz:");
+				m1.imprimirMatriz();
+				
+				while(true) {
+					System.out.println("\nO que deseja fazer com a Matriz agora?"
+							+ "\n1. Operações isoladas (apenas ela)"
+							+ "\n2. Operações com 2 Matrizes"
+							+ "\n0. Finalizar");
+					
+					opcao = sc.nextInt();
+					
+					if (opcao == 0) {
+						continuar = 0;
+						System.out.println("Finalizando o programa...");
+						System.out.println("Obrigado por utilizar!");
+						break;
+					}
+					
+					switch(opcao) {
+						case 1: // Operações isoladas
+
+					    subOpcao = -1;
+
+					    	while (subOpcao != 0) {
+					    		System.out.println("O que você deseja fazer com a matriz inserida?"
+					                + "\n1. Transposta"
+					                + "\n2. Oposta"
+					                + "\n3. Matriz nula"
+					                + "\n4. Verificar identidade"
+					                + "\n5. Verificar diagonal"
+					                + "\n6. Verificar singular"
+					                + "\n7. Verificar simétrica"
+					                + "\n8. Verificar anti-simétrica"
+					                + "\n9. Copiar matriz"
+					                + "\n0. Voltar");
+
+					    		subOpcao = sc.nextInt();
+
+					    		switch(subOpcao) {
+					    			case 1:
+					    				System.out.println("\nSua matriz:");
+					    				m1.imprimirMatriz();
+
+					    				System.out.println("\nSua matriz transposta:");
+					    				( m1.gerarTransposta() ).imprimirMatriz();
+					    				break;
+
+					    			case 2:
+					    				System.out.println("\nSua matriz:");
+					    				m1.imprimirMatriz();
+
+					    				System.out.println("\nSua matriz oposta:");
+					    				( m1.gerarOposta() ).imprimirMatriz();
+					    				break;
+
+					    			case 3:
+					    				System.out.println("\nSua matriz:");
+					    				m1.imprimirMatriz();
+
+					    				System.out.println("\nSua matriz nula:");
+					    				( m1.gerarNula() ).imprimirMatriz();
+					    				break;
+
+					    			case 4:
+					    				System.out.println("\nSua matriz:");
+					    				m1.imprimirMatriz();
+
+					    				if ( m1.verificarIdentidade() ) {
+					    					System.out.println("A matriz é uma identidade!");
+					    				} else {
+					    					System.out.println("Sua matriz não é identidade.");
+					    				}
+					    				break;
+
+					    			case 5:
+					    				System.out.println("\nSua matriz:");
+					    				m1.imprimirMatriz();
+
+					    				if ( m1.verificarDiagonal() ) {
+					    					System.out.println("A matriz é diagonal!");
+					    				} else {
+					                    System.out.println("Sua matriz não é diagonal.");
+					    				}
+					    				break;
+
+					    			case 6:
+					    				System.out.println("\nSua matriz:");
+					    				m1.imprimirMatriz();
+
+					    				if ( m1.verificarSingular() ) {
+					    					System.out.println("A matriz é singular!");
+					    				} else {
+					    					System.out.println("Sua matriz não é singular.");
+					    				}
+					    				break;
+
+					    			case 7:
+					    				System.out.println("\nSua matriz:");
+					    				m1.imprimirMatriz();
+
+					    				if ( m1.verificarSimetria() ) {
+					    					System.out.println("A matriz é simétrica!");
+					    				} else {
+					    					System.out.println("Sua matriz não é simétrica.");
+					    				}
+					    				break;
+
+					    			case 8:
+					    				System.out.println("\nSua matriz:");
+					    				m1.imprimirMatriz();
+
+					    				if ( m1.verificarAntisimetria() ) {
+					    					System.out.println("A matriz é anti-simétrica!");
+					    				} else {
+					    					System.out.println("Sua matriz não é anti-simétrica.");
+					    				}
+					    				break;
+
+					    			case 9:
+					    				System.out.println("\nSua matriz:");
+					    				m1.imprimirMatriz();
+
+					    				System.out.println("\nCópia exata da sua matriz:");
+					    				( m1.clonarMatriz() ).imprimirMatriz();
+					    				break;
+
+					    			case 0:
+					    				break;
+
+					    			default:
+					    				break;
+					    		}
+					    	}
+					    break;
+								
+						case 2: // Operações de 2 matrizes
+							
+							subOpcao = -1;
+							
+							while (subOpcao != 0) {
+								System.out.println("O que você deseja fazer com a Matriz inserida?"
+										+ "\n1. Somar"
+										+ "\n2. Subtrair"
+										+ "\n3. Multiplicar"
+										+ "\n4. Comparar (Semântica)"
+										+ "\n0. Voltar");
+								
+								subOpcao = sc.nextInt();
+								
+								switch(subOpcao) {
+									case 1:
+										System.out.println("Para prosseguir com a Soma de Matrizes é preciso criar uma nova "
+												+ "Matriz com o mesmo tamanho da Anterior (Linhas e Colunas)");
+
+										Matriz soma = new Matriz(linhas, colunas);
+										
+										System.out.println("\nDefina os valores dos " + linhas*colunas + " elementos da Matriz.");
+										for (int i=0; i<soma.getLinhas(); i++) {
+											for (int j=0; j<soma.getColunas(); j++) {
+												System.out.print("Valor do Elemento (Linha " + (i+1) + " | Coluna "+ (j+1) +"): ");
+												soma.setElemento(i, j, sc.nextDouble());
+											}
+										}
+										
+										System.out.println("Todos os elementos foram registrados com sucesso.");
+										System.out.println("\nMatriz 1:");
+										m1.imprimirMatriz();
+										
+										System.out.println("\nMatriz 2:");
+										soma.imprimirMatriz();
+										
+										System.out.println("\nAgora a soma das duas Matrizes:");
+										(m1.somarMatriz(soma)).imprimirMatriz();
+										break;
+										
+									case 2:
+										System.out.println("Para prosseguir com a Soma de Matrizes é preciso criar uma nova "
+												+ "Matriz com o mesmo tamanho da Anterior (Linhas e Colunas)");
+
+										Matriz subtracao = new Matriz(linhas, colunas);
+										
+										System.out.println("\nDefina os valores dos " + linhas*colunas + " elementos da Matriz.");
+										for (int i=0; i<subtracao.getLinhas(); i++) {
+											for (int j=0; j<subtracao.getColunas(); j++) {
+												System.out.print("Valor do Elemento (Linha " + (i+1) + " | Coluna "+ (j+1) +"): ");
+												subtracao.setElemento(i, j, sc.nextDouble());
+											}
+										}
+										
+										System.out.println("Todos os elementos foram registrados com sucesso.");
+										System.out.println("\nMatriz 1:");
+										m1.imprimirMatriz();
+										
+										System.out.println("\nMatriz 2:");
+										subtracao.imprimirMatriz();
+										
+										System.out.println("\nAgora a subtração das duas Matrizes:");
+										(m1.subtrairMatriz(subtracao)).imprimirMatriz();
+										break;
+										
+									case 3: // multiplicar
+										
+										System.out.println("Para prosseguir com a Multiplicação de Matrizes é preciso "
+												+ "criar uma nova Matriz (ela deve possuir a mesma quantidade de Linhas que a Matriz original tenha "
+												+ "de Colunas.");
+										
+										System.out.print("Numero de Colunas da nova Matriz: ");
+										colunas = sc.nextInt();
+										
+										Matriz multi = new Matriz(linhas, colunas);
+										
+										System.out.println("\nDefina os valores dos " + linhas*colunas + " elementos da Matriz.");
+										for (int i=0; i<multi.getLinhas(); i++) {
+											for (int j=0; j<multi.getColunas(); j++) {
+												System.out.print("Valor do Elemento (Linha " + (i+1) + " | Coluna "+ (j+1) +"): ");
+												multi.setElemento(i, j, sc.nextDouble());
+											}
+										}
+										
+										System.out.println("Todos os elementos foram registrados com sucesso.");
+										System.out.println("\nMatriz 1:");
+										m1.imprimirMatriz();
+										
+										System.out.println("\nMatriz 2:");
+										multi.imprimirMatriz();
+										
+										System.out.println("\nAgora a Multiplicação das duas Matrizes:");
+										(m1.multiplicarMatriz(multi)).imprimirMatriz();
+										break;
+										
+									case 4: // comparar semanticamente
+										
+										System.out.println("Para fazer a Comparação Semantica é preciso criar uma nova Matriz.");
+										System.out.print("Numero de Linhas da nova Matriz: ");
+										int linhas2 = sc.nextInt();
+										
+										System.out.print("Numero de Colunas da nova Matriz: ");
+										int colunas2 = sc.nextInt();
+										
+										Matriz comp = new Matriz(linhas2, colunas2);
+										
+										if (m1.getLinhas() != comp.getLinhas() || m1.getColunas() != comp.getColunas() ) {
+											System.out.println("As matrizes são diferentes, pois não possuem o mesmo tamanho (Linhas e Colunas).");
+										}
+										
+										System.out.println("\nDefina os valores dos " + linhas2*colunas2 + " elementos da Matriz.");
+										for (int i=0; i<comp.getLinhas(); i++) {
+											for (int j=0; j<comp.getColunas(); j++) {
+												System.out.print("Valor do Elemento (Linha " + (i+1) + " | Coluna "+ (j+1) +"): ");
+												comp.setElemento(i, j, sc.nextDouble());
+											}
+										}
+										
+										System.out.println("\nMatriz 1:");
+										m1.imprimirMatriz();
+										
+										System.out.println("\nMatriz 2:");
+										comp.imprimirMatriz();
+										
+										System.out.println("Resultado da Comparação Semantica: ");
+										if (m1.compararMatriz(comp) != null ) {
+											System.out.println("Elas são identicas! ");
+										} else {
+											System.out.println("Elas não são identicas...");
+										}
+										break;
+										
+									case 0:
+						                System.out.println("Voltando ao menu...");
+						                break;
+
+						            default:
+						                System.out.println("Por favor, insira apenas números válidos.");
+						                break;
+								}
+							}
+						}
+						
+				}			
+			}
+		}
+		catch (java.util.InputMismatchException erro) {
+			System.out.println("Entrada inválida. Por favor, digite apenas números!");
+		}
+		catch (Exception erro) {
+			System.out.println("Um erro desconhecido ocorreu! \nCódigo do erro: " + erro.getMessage());
+		}
+		
+	}
+}
+
+package Questao_8;
+
+/*	Um módulo de processamento numérico precisa manipular operações matriciais. Desenvolva uma
+classe Matriz que ofereça suporteàs operações básicas de álgebra linear:
+	a) Construtor para inicializar dimensões (linhas e colunas); ✔
+	b) Métodos de acesso aos elementos;	✔
+	c) Método para somar duas matrizes; ✔
+	d) Operações complementares: (feito)
+		i) Comparação semântica; ✔
+		ii) Transposta; ✔
+		iii) Oposta; ✔
+		iv) Matriz nula; ✔
+		v) Verificação se é identidade; ✔
+		vi) Verificação se é diagonal; ✔
+		vii) Verificação se é singular;	✔
+		viii) Verificação se é simétrica; ✔
+		ix) Verificação se é anti-simétrica; ✔
+		x) Subtração; ✔
+		xi) Multiplicação; ✔
+		xii) Cópia da matriz. ✔  		*/
+
+public class Matriz {
+
+	private double[][] matriz;
+	private int linhas;
+	private int colunas;
+	
+	// construtor
+	public Matriz(int linhas, int colunas) {
+		this.linhas = linhas;
+		this.colunas = colunas;
+		this.matriz = new double[linhas][colunas];
+	}
+	
+	// get & set
+	public int getLinhas() {
+		return linhas;
+	}
+	public void setLinhas(int linhas) {
+		this.linhas = linhas;
+	}
+	
+	public int getColunas() {
+		return colunas;
+	}
+	public void setColunas(int colunas) {
+		this.colunas = colunas;
+	}
+	
+	public double getElemento(int linhas, int colunas) {
+		return matriz[linhas][colunas];
+	}
+	public void setElemento(int linhas, int colunas, double valor) {
+		this.matriz[linhas][colunas] = valor;
+	}
+	
+	// Imprimir a matriz
+	public void imprimirMatriz() {
+		
+		for (int i = 0; i < this.getLinhas(); i++) {
+			for (int j = 0; j < this.getColunas(); j++) {
+				System.out.print(this.getElemento(i, j) + " ");
+			}
+			System.out.println();
+		}
+	}
+	
+	
+	// Soma de matrizes
+	public Matriz somarMatriz(Object obj) {
+		if ( !(obj instanceof Matriz) ) {
+			return null;
+		}
+		
+		Matriz outra = (Matriz) obj;
+		
+		if (this.linhas != outra.linhas || this.colunas != outra.colunas) {
+			return null;
+		}
+		
+		Matriz resultado = new Matriz(linhas, colunas);
+		
+		for (int i=0; i<linhas; i++) {
+			for (int j=0; j<colunas; j++) {
+				resultado.matriz[i][j] = this.matriz[i][j] + outra.matriz[i][j];
+			}
+		}
+		
+		return resultado;
+	}
+	
+	
+	// Comparar elas (ver se são iguais)
+	public Matriz compararMatriz(Object obj) {
+		
+		if ( !(obj instanceof Matriz) ) {
+			return null;
+		}
+		
+		Matriz outra = (Matriz) obj;
+		
+		if (this.linhas != outra.linhas || this.colunas != outra.colunas) {
+			return null;
+		}
+		
+		for (int i=0; i<linhas; i++) {
+			for (int j=0; j<colunas; j++) {
+				
+				if (this.getElemento(i, j) != outra.getElemento(i, j)) {
+					return null;
+				}
+				
+			}
+		}
+		
+		return outra;
+	}
+	
+	
+	// Transpor uma matriz
+	public Matriz gerarTransposta() {
+		
+		int linhasT, colunasT;
+		
+		colunasT = this.getLinhas();
+		linhasT = this.getColunas();
+		
+		Matriz transposta = new Matriz(linhasT, colunasT);
+		
+		for (int i=0; i<transposta.getLinhas(); i++) {
+			for (int j=0; j<transposta.getColunas(); j++) {
+				
+				transposta.setElemento(i, j, this.getElemento(j, i));
+				
+			}
+		}
+		
+		return transposta;
+		
+	}
+	
+	
+	// Fazer matriz Oposta
+	public Matriz gerarOposta() {
+		
+		Matriz oposta = new Matriz(this.linhas, this.colunas);
+		
+		for (int i=0; i<this.getLinhas(); i++) {
+			for (int j=0; j<this.getColunas(); j++) {
+				
+				double elemento = this.getElemento(i, j) * (-1);
+				oposta.setElemento(i, j, elemento);
+				
+			}
+		}
+		
+		return oposta;
+		
+	}
+	
+	
+	// Anular a Matriz
+	public Matriz gerarNula() {
+		
+		Matriz nula = new Matriz(this.linhas, this.colunas);
+		
+		for (int i=0; i<this.getLinhas(); i++) {
+			for (int j=0; j<this.getColunas(); j++) {
+				
+				nula.setElemento(i, j, 0);
+					
+			}
+		}
+			
+		return nula;
+			
+	}
+	
+	
+	// Verificar se ela é Identidade (Quadrada, Dg. Principal = 1, Resto = 0)
+	public boolean verificarIdentidade() {
+		
+		if ( this.getLinhas() != this.getColunas() ) {
+			return false;
+		}
+		
+		for (int i=0; i<this.getLinhas(); i++) {
+			for (int j=0; j<this.getColunas(); j++) {
+				
+				if (i == j) {
+					if (this.getElemento(i, j) != 1) {
+						return false;
+					}
+ 				
+				} else {
+					if (this.getElemento(i, j) != 0) {
+						return false;
+					}
+				}
+				
+			}
+ 		}
+		
+		return true;
+	}
+	
+	
+	// Verificar se a Matriz é Diagonal (tudo foda da Dg. Principal = 0)
+	public boolean verificarDiagonal() {
+			
+		if ( this.getLinhas() != this.getColunas() ) {
+			return false;
+		}
+			
+		for (int i=0; i<this.getLinhas(); i++) {
+			for (int j=0; j<this.getColunas(); j++) {
+					
+				if (i != j) {
+					if (this.getElemento(i, j) != 0 ) {
+						return false;
+					}
+				}
+					
+			}
+		}
+			
+		return true;
+	}
+	
+	
+	// Verificar se é Singular (incompleto)
+	public boolean verificarSingular() {
+
+		if (this.getLinhas() != this.getColunas() ) {
+			return false;
+		}
+		
+		Matriz copia = new Matriz(this.getLinhas(),this.getColunas());
+		for (int i=0; i<this.getLinhas(); i++) {
+			for (int j=0; j<this.getColunas(); j++) {
+				copia.setElemento(i, j, this.getElemento(i, j));
+			}
+		}
+		
+		for (int j=0; j<copia.getColunas(); j++) {
+			if (copia.getElemento(j, j) == 0) {
+				
+				boolean encontrou = false;
+				
+				for (int k=j+1; k<copia.getLinhas(); k++) {
+						
+					if (copia.getElemento(k, j) != 0) {
+						for (int c = 0; c < copia.getColunas(); c++) {
+							double temp = copia.getElemento(j, c);
+							copia.setElemento(j, c, copia.getElemento(k, c));
+							copia.setElemento(k, c, temp);
+						}
+						encontrou = true;
+						break;
+						
+					}
+				}
+				
+				
+				if (!encontrou) {
+					return true;
+				}
+			}
+				
+			for (int i=j+1; i<copia.getLinhas(); i++) {
+					
+				double fator = copia.getElemento(i,j) / copia.getElemento(j,j);
+					
+				for (int c=j; c<copia.getColunas(); c++) {
+					double novo = copia.getElemento(i, c) - fator * copia.getElemento(j, c);
+					copia.setElemento(i, c, novo);
+				}	
+			}
+		}
+		return false;
+	}
+	
+	
+	// Verificar se ela é Simetrica
+	public boolean verificarSimetria() {
+		
+		if (this.getLinhas() != this.getColunas() ) {
+			return false;
+		}
+		
+		for (int i=0; i<this.getLinhas(); i++) {
+			for (int j=i+1; j<this.getColunas(); j++) {
+				
+				if (this.getElemento(i, j) != this.getElemento(j, i) ) {
+					return false;
+				}
+				
+			}
+		}
+		
+		return true;
+	}
+	
+	
+	// Verificar se ela é Anti-Simetrica
+	public boolean verificarAntisimetria() {
+		
+		if (this.getLinhas() != this.getColunas() ) {
+			return false;
+		}
+		
+		for (int i=0; i<this.getLinhas(); i++) {
+			for (int j=i; j<this.getColunas(); j++) {
+				
+				if (this.getElemento(i, j) != (-1) * this.getElemento(j, i) ) {
+					return false;
+				}
+				
+			}
+		}
+		
+		return true;
+	}
+	
+	
+	// Subtrair matrizes
+	public Matriz subtrairMatriz(Object obj) {
+		if ( !(obj instanceof Matriz) ) {
+			return null;
+		}
+			
+		Matriz outra = (Matriz) obj;
+			
+		if (this.getLinhas() != outra.getLinhas() || this.getColunas() != outra.getColunas() ) {
+			return null;
+		}
+			
+		Matriz resultado = new Matriz(linhas, colunas);
+			
+		for (int i=0; i<linhas; i++) {
+			for (int j=0; j<colunas; j++) {
+				resultado.matriz[i][j] = this.matriz[i][j] - outra.matriz[i][j];
+			}
+		}
+			
+		return resultado;
+	}
+	
+	
+	// Multiplicar matrizes ( Obs: se n puder multiplicar vai resultar em "null" e um erro de impressão )
+	public Matriz multiplicarMatriz(Object obj) {
+		if ( !(obj instanceof Matriz) ) {
+			return null;
+		}
+			
+		Matriz outra = (Matriz) obj;
+				
+		if (this.getColunas() != outra.getLinhas() ) {
+			return null;
+		}
+		
+		Matriz multiplicada = new Matriz(this.getLinhas(), outra.getColunas() );
+		
+		for (int i=0; i<multiplicada.getLinhas(); i++) {
+			for (int j=0; j<multiplicada.getColunas(); j++) {
+				
+				double elemento = 0;
+				
+				for (int k=0; k<this.getColunas(); k++) {
+					elemento += this.getElemento(i, k) * outra.getElemento(k, i);
+				}
+				multiplicada.setElemento(i, j, elemento);
+			}
+			
+		}
+		return multiplicada;
+		
+	}
+	
+	
+	// Clonar Matriz
+	public Matriz clonarMatriz() {
+		
+		Matriz copia = new Matriz(this.getLinhas(), this.getColunas() );
+		
+		for (int i=0; i<this.getLinhas(); i++) {
+			for (int j=0; j<this.getColunas(); j++) {
+				
+				copia.setElemento(i, j, this.getElemento(i, j) );
+				
+			}
+		}
+		return copia;
+	}
+	
+} // final da classe
