@@ -10,7 +10,7 @@ public class Main {
 		
 		try {
 			
-			int opcao, subOpcao = -1;
+			int escolha, opcao, subOpcao = -1;
 			
 			int continuar = -1;
 			int linhas, colunas;
@@ -28,7 +28,7 @@ public class Main {
 					break;
 				}
 				
-				System.out.println("\nPara podermos começar, é preciso uma Matriz seja criada!");
+				System.out.println("\nPara podermos começar, é preciso que uma Matriz seja criada!");
 				System.out.print("Numero de Linhas da Matriz: ");
 				linhas = sc.nextInt();
 				
@@ -85,15 +85,14 @@ public class Main {
 
 					    	while (subOpcao != 0) {
 					    		System.out.println("O que você deseja fazer com a matriz inserida?"
-					                + "\n1. Transposta"
-					                + "\n2. Oposta"
-					                + "\n3. Matriz nula"
-					                + "\n4. Verificar identidade"
-					                + "\n5. Verificar diagonal"
-					                + "\n6. Verificar singular"
-					                + "\n7. Verificar simétrica"
-					                + "\n8. Verificar anti-simétrica"
-					                + "\n9. Copiar matriz"
+					                + "\n1. Criar sua Matriz Transposta"
+					                + "\n2. Criar sua Matriz Oposta"
+					                + "\n3. Criar a Matriz Nula"
+					                + "\n4. Verificar Identidade"
+					                + "\n5. Verificar Diagonal"
+					                + "\n6. Verificar Singular"
+					                + "\n7. Verificar Simétrica"
+					                + "\n8. Verificar Anti-simétrica"
 					                + "\n0. Voltar");
 
 					    		subOpcao = sc.nextInt();
@@ -105,6 +104,7 @@ public class Main {
 
 					    				System.out.println("\nSua matriz transposta:");
 					    				( m1.gerarTransposta() ).imprimirMatriz();
+					    				System.out.println("");
 					    				break;
 
 					    			case 2:
@@ -113,6 +113,7 @@ public class Main {
 
 					    				System.out.println("\nSua matriz oposta:");
 					    				( m1.gerarOposta() ).imprimirMatriz();
+					    				System.out.println("");
 					    				break;
 
 					    			case 3:
@@ -121,6 +122,7 @@ public class Main {
 
 					    				System.out.println("\nSua matriz nula:");
 					    				( m1.gerarNula() ).imprimirMatriz();
+					    				System.out.println("");
 					    				break;
 
 					    			case 4:
@@ -132,6 +134,7 @@ public class Main {
 					    				} else {
 					    					System.out.println("Sua matriz não é identidade.");
 					    				}
+					    				System.out.println("");
 					    				break;
 
 					    			case 5:
@@ -143,6 +146,7 @@ public class Main {
 					    				} else {
 					                    System.out.println("Sua matriz não é diagonal.");
 					    				}
+					    				System.out.println("");
 					    				break;
 
 					    			case 6:
@@ -154,6 +158,7 @@ public class Main {
 					    				} else {
 					    					System.out.println("Sua matriz não é singular.");
 					    				}
+					    				System.out.println("");
 					    				break;
 
 					    			case 7:
@@ -165,6 +170,7 @@ public class Main {
 					    				} else {
 					    					System.out.println("Sua matriz não é simétrica.");
 					    				}
+					    				System.out.println("");
 					    				break;
 
 					    			case 8:
@@ -178,18 +184,13 @@ public class Main {
 					    				}
 					    				break;
 
-					    			case 9:
-					    				System.out.println("\nSua matriz:");
-					    				m1.imprimirMatriz();
-
-					    				System.out.println("\nCópia exata da sua matriz:");
-					    				( m1.clonarMatriz() ).imprimirMatriz();
-					    				break;
-
 					    			case 0:
+					    				System.out.println("");
 					    				break;
 
 					    			default:
+					    				System.out.println("Por favor, insira apenas numeros.");
+					    				System.out.println("");
 					    				break;
 					    		}
 					    	}
@@ -210,84 +211,157 @@ public class Main {
 								subOpcao = sc.nextInt();
 								
 								switch(subOpcao) {
-									case 1:
-										System.out.println("Para prosseguir com a Soma de Matrizes é preciso criar uma nova "
-												+ "Matriz com o mesmo tamanho da Anterior (Linhas e Colunas)");
-
-										Matriz soma = new Matriz(linhas, colunas);
+									case 1: // soma
+										System.out.println("Você deseja criar uma Nova Matriz ou usar uma Copia da ja existente? (0-Criar Nova | 1-Usar copia)");
+										escolha = sc.nextInt();
 										
-										System.out.println("\nDefina os valores dos " + linhas*colunas + " elementos da Matriz.");
-										for (int i=0; i<soma.getLinhas(); i++) {
-											for (int j=0; j<soma.getColunas(); j++) {
-												System.out.print("Valor do Elemento (Linha " + (i+1) + " | Coluna "+ (j+1) +"): ");
-												soma.setElemento(i, j, sc.nextDouble());
+										if (escolha == 0) {
+											System.out.println("Para prosseguir com a Soma de Matrizes é preciso criar uma nova "
+													+ "Matriz com o mesmo tamanho da Anterior (Linhas e Colunas)");
+
+											Matriz soma = new Matriz(linhas, colunas);
+											
+											System.out.println("\nDefina os valores dos " + linhas*colunas + " elementos da Matriz.");
+											for (int i=0; i<soma.getLinhas(); i++) {
+												for (int j=0; j<soma.getColunas(); j++) {
+													System.out.print("Valor do Elemento (Linha " + (i+1) + " | Coluna "+ (j+1) +"): ");
+													soma.setElemento(i, j, sc.nextDouble());
+												}
+											}
+											
+											System.out.println("Todos os elementos foram registrados com sucesso.");
+											System.out.println("\nMatriz 1:");
+											m1.imprimirMatriz();
+											
+											System.out.println("\nMatriz 2:");
+											soma.imprimirMatriz();
+											
+											System.out.println("\nAgora a soma das duas Matrizes:");
+											(m1.somarMatriz(soma)).imprimirMatriz();
+											break;
+											
+										}
+										else if (escolha == 1) {
+											
+											System.out.println("Opção de copia selecionada com sucesso.");
+											System.out.println("\nMatriz 1:");
+											m1.imprimirMatriz();
+											
+											System.out.println("\nMatriz 2 (Copia da 1):");
+											( m1.clonarMatriz() ).imprimirMatriz();
+											
+											System.out.println("\nAgora a soma das duas Matrizes:");
+											(m1.somarMatriz( m1.clonarMatriz() )).imprimirMatriz();
+											
+										} else {
+											while (escolha !=0 && escolha !=1) {
+												System.out.println("Por favor, escolha um valor valido. (1-Criar uma Nova Matriz | 0-Usar uma Copia)");
+												escolha = sc.nextInt();
 											}
 										}
-										
-										System.out.println("Todos os elementos foram registrados com sucesso.");
-										System.out.println("\nMatriz 1:");
-										m1.imprimirMatriz();
-										
-										System.out.println("\nMatriz 2:");
-										soma.imprimirMatriz();
-										
-										System.out.println("\nAgora a soma das duas Matrizes:");
-										(m1.somarMatriz(soma)).imprimirMatriz();
+										System.out.println("");
 										break;
 										
-									case 2:
-										System.out.println("Para prosseguir com a Soma de Matrizes é preciso criar uma nova "
-												+ "Matriz com o mesmo tamanho da Anterior (Linhas e Colunas)");
-
-										Matriz subtracao = new Matriz(linhas, colunas);
+									case 2: // subtracao
+										System.out.println("Você deseja criar uma Nova Matriz ou usar uma Copia da ja existente? (1-Criar Nova | 0-Usar copia)");
+										escolha = sc.nextInt();
 										
-										System.out.println("\nDefina os valores dos " + linhas*colunas + " elementos da Matriz.");
-										for (int i=0; i<subtracao.getLinhas(); i++) {
-											for (int j=0; j<subtracao.getColunas(); j++) {
-												System.out.print("Valor do Elemento (Linha " + (i+1) + " | Coluna "+ (j+1) +"): ");
-												subtracao.setElemento(i, j, sc.nextDouble());
+										if (escolha == 0) {
+											System.out.println("Para prosseguir com a Subtração de Matrizes é preciso criar uma nova "
+													+ "Matriz com o mesmo tamanho da Anterior (Linhas e Colunas)");
+
+											Matriz subtracao = new Matriz(linhas, colunas);
+											
+											System.out.println("\nDefina os valores dos " + linhas*colunas + " elementos da Matriz.");
+											for (int i=0; i<subtracao.getLinhas(); i++) {
+												for (int j=0; j<subtracao.getColunas(); j++) {
+													System.out.print("Valor do Elemento (Linha " + (i+1) + " | Coluna "+ (j+1) +"): ");
+													subtracao.setElemento(i, j, sc.nextDouble());
+												}
+											}
+											
+											System.out.println("Todos os elementos foram registrados com sucesso.");
+											System.out.println("\nMatriz 1:");
+											m1.imprimirMatriz();
+											
+											System.out.println("\nMatriz 2:");
+											subtracao.imprimirMatriz();
+											
+											System.out.println("\nAgora a subtração das duas Matrizes:");
+											(m1.subtrairMatriz(subtracao)).imprimirMatriz();
+											break;
+											
+										}
+										else if (escolha == 1) {
+											
+											System.out.println("Opção de copia selecionada com sucesso.");
+											System.out.println("\nMatriz 1:");
+											m1.imprimirMatriz();
+											
+											System.out.println("\nMatriz 2 (Copia da 1):");
+											( m1.clonarMatriz() ).imprimirMatriz();
+											
+											System.out.println("\nAgora a subtracao das duas Matrizes:");
+											(m1.subtrairMatriz( m1.clonarMatriz() )).imprimirMatriz();
+											
+										} else {
+											while (escolha !=0 && escolha !=1) {
+												System.out.println("Por favor, escolha um valor valido. (0-Criar uma Nova Matriz | 1-Usar uma Copia)");
+												escolha = sc.nextInt();
 											}
 										}
-										
-										System.out.println("Todos os elementos foram registrados com sucesso.");
-										System.out.println("\nMatriz 1:");
-										m1.imprimirMatriz();
-										
-										System.out.println("\nMatriz 2:");
-										subtracao.imprimirMatriz();
-										
-										System.out.println("\nAgora a subtração das duas Matrizes:");
-										(m1.subtrairMatriz(subtracao)).imprimirMatriz();
+										System.out.println("");
 										break;
 										
 									case 3: // multiplicar
+										System.out.println("Você deseja criar uma Nova Matriz ou usar uma Copia da ja existente? (0-Criar Nova | 1-Usar copia)");
+										escolha = sc.nextInt();
 										
-										System.out.println("Para prosseguir com a Multiplicação de Matrizes é preciso "
-												+ "criar uma nova Matriz (ela deve possuir a mesma quantidade de Linhas que a Matriz original tenha "
-												+ "de Colunas.");
-										
-										System.out.print("Numero de Colunas da nova Matriz: ");
-										colunas = sc.nextInt();
-										
-										Matriz multi = new Matriz(linhas, colunas);
-										
-										System.out.println("\nDefina os valores dos " + linhas*colunas + " elementos da Matriz.");
-										for (int i=0; i<multi.getLinhas(); i++) {
-											for (int j=0; j<multi.getColunas(); j++) {
-												System.out.print("Valor do Elemento (Linha " + (i+1) + " | Coluna "+ (j+1) +"): ");
-												multi.setElemento(i, j, sc.nextDouble());
+										if (escolha == 0) {
+											System.out.println("Para prosseguir com a Multiplicação de Matrizes é preciso "
+													+ "criar uma nova Matriz (ela deve possuir a mesma quantidade de Linhas que a Matriz original tenha "
+													+ "de Colunas.");
+											
+											System.out.print("Numero de Colunas da nova Matriz: ");
+											colunas = sc.nextInt();
+											
+											Matriz multi = new Matriz(m1.getColunas(), colunas);
+											
+											System.out.println("\nDefina os valores dos " + linhas*colunas + " elementos da Matriz.");
+											for (int i=0; i<multi.getLinhas(); i++) {
+												for (int j=0; j<multi.getColunas(); j++) {
+													System.out.print("Valor do Elemento (Linha " + (i+1) + " | Coluna "+ (j+1) +"): ");
+													multi.setElemento(i, j, sc.nextDouble());
+												}
+											}
+											
+											System.out.println("Todos os elementos foram registrados com sucesso.");
+											System.out.println("\nMatriz 1:");
+											m1.imprimirMatriz();
+											
+											System.out.println("\nMatriz 2:");
+											multi.imprimirMatriz();
+											
+											System.out.println("\nAgora a Multiplicação das duas Matrizes:");
+											(m1.multiplicarMatriz(multi)).imprimirMatriz();
+										}
+										else if (escolha == 1) {
+											System.out.println("Opção de copia selecionada com sucesso.");
+											System.out.println("\nMatriz 1:");
+											m1.imprimirMatriz();
+											
+											System.out.println("\nMatriz 2 (Copia da 1):");
+											( m1.clonarMatriz() ).imprimirMatriz();
+											
+											System.out.println("\nAgora a multiplicação das duas Matrizes:");
+											(m1.multiplicarMatriz( m1.clonarMatriz() )).imprimirMatriz();
+										} else {
+											while (escolha !=0 && escolha !=1) {
+												System.out.println("Por favor, escolha um valor valido. (0-Criar uma Nova Matriz | 1-Usar uma Copia)");
+												escolha = sc.nextInt();
 											}
 										}
-										
-										System.out.println("Todos os elementos foram registrados com sucesso.");
-										System.out.println("\nMatriz 1:");
-										m1.imprimirMatriz();
-										
-										System.out.println("\nMatriz 2:");
-										multi.imprimirMatriz();
-										
-										System.out.println("\nAgora a Multiplicação das duas Matrizes:");
-										(m1.multiplicarMatriz(multi)).imprimirMatriz();
+										System.out.println("");
 										break;
 										
 									case 4: // comparar semanticamente
@@ -325,14 +399,18 @@ public class Main {
 										} else {
 											System.out.println("Elas não são identicas...");
 										}
+										
+										System.out.println("");
 										break;
 										
 									case 0:
 						                System.out.println("Voltando ao menu...");
+						                System.out.println("");
 						                break;
 
 						            default:
 						                System.out.println("Por favor, insira apenas números válidos.");
+						                System.out.println("");
 						                break;
 								}
 							}
@@ -341,10 +419,25 @@ public class Main {
 				}			
 			}
 		}
-		catch (java.util.InputMismatchException erro) {
-			System.out.println("Entrada inválida. Por favor, digite apenas números!");
+		catch (java.util.InputMismatchException erro) { // entradas invalidas
+			System.out.println("Entrada invalida. Por favor, digite apenas numero! \nCódigo do erro:" + erro.getMessage());
+			sc.nextLine(); // limpar o buffer
 		}
-		catch (Exception erro) {
+		
+		catch (IllegalArgumentException erro) { // contas impossiveis (soma com matriz de tamanho dif e etc)
+			String msg = erro.getMessage();
+			if (msg == null) {
+				msg = "Operação inválida.";
+			}
+			
+		    System.out.println("Um erro ocorreu devido a uma Operação! \nCódigo do erro: " + erro.getMessage());
+		}
+		
+		catch(ArrayIndexOutOfBoundsException erro) { // acessar indices do array que n existem (array 2x2 e tentar pegar o elemento 45)
+			System.out.println("Um erro ocorreu devido a uma tentativa de acessar um elemento inexistente em um Array! \nCódigo do erro:" + erro.getMessage());
+		}
+		
+		catch (Exception erro) { // erros genericos
 			System.out.println("Um erro desconhecido ocorreu! \nCódigo do erro: " + erro.getMessage());
 		}
 		
@@ -701,7 +794,7 @@ public class Matriz {
 				double elemento = 0;
 				
 				for (int k=0; k<this.getColunas(); k++) {
-					elemento += this.getElemento(i, k) * outra.getElemento(k, i);
+					elemento += this.getElemento(i, k) * outra.getElemento(k, j);
 				}
 				multiplicada.setElemento(i, j, elemento);
 			}
@@ -726,5 +819,5 @@ public class Matriz {
 		}
 		return copia;
 	}
-	
-} // final da classe
+
+}
