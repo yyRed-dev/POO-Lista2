@@ -353,25 +353,6 @@ public class Main {
 
 package Questao_8;
 
-/*	Um módulo de processamento numérico precisa manipular operações matriciais. Desenvolva uma
-classe Matriz que ofereça suporteàs operações básicas de álgebra linear:
-	a) Construtor para inicializar dimensões (linhas e colunas); ✔
-	b) Métodos de acesso aos elementos;	✔
-	c) Método para somar duas matrizes; ✔
-	d) Operações complementares: (feito)
-		i) Comparação semântica; ✔
-		ii) Transposta; ✔
-		iii) Oposta; ✔
-		iv) Matriz nula; ✔
-		v) Verificação se é identidade; ✔
-		vi) Verificação se é diagonal; ✔
-		vii) Verificação se é singular;	✔
-		viii) Verificação se é simétrica; ✔
-		ix) Verificação se é anti-simétrica; ✔
-		x) Subtração; ✔
-		xi) Multiplicação; ✔
-		xii) Cópia da matriz. ✔  		*/
-
 public class Matriz {
 
 	private double[][] matriz;
