@@ -1,0 +1,134 @@
+package Questao_13;
+import java.util.Scanner;
+
+public class Main {
+
+	private static Scanner sc;
+	
+	public static void main(String[] args) {
+	
+		sc = new Scanner(System.in);
+		int opcao = -1;
+		
+		System.out.println("Bem vindo ao Boletim Online!");
+		
+		Boletim b1 = new Boletim();
+		
+		try {
+			
+			while (opcao != 0) {
+				
+				System.out.println("\nO que você deseja fazer?");
+				System.out.println("1. Visualizar notas."
+						+ "\n2. Adicionar uma nova nota."
+						+ "\n3. Calcular media."
+						+ "\n4. Mostrar maior e menor notas."
+						+ "\n0. Encerrar.");
+				
+				System.out.print("Escolha: ");
+				opcao = sc.nextInt();
+				System.out.println("\n");
+				
+				switch (opcao) {
+					case 1:
+						System.out.println("Imprimindo notas: ");
+						System.out.print( b1.imprimirNotas() );
+						break;
+						
+					case 2:
+						System.out.print("Qual nota você deseja adicionar?\nNota: ");
+						double nota = sc.nextDouble();
+						
+						b1.addNota(nota);
+						System.out.println("Nota adicionada com sucesso!");
+						break;
+						
+					case 3:
+						System.out.println("Calculando Media...");
+						System.out.println("Media: " + b1.calcularMedia() );
+						break;
+						
+					case 4:
+						System.out.println("Maior Nota: " + b1.verifMaior() + " | Menor Nota: " + b1.verifMenor() );						
+						break;
+						
+					case 0:
+						System.out.println("Finalizando o programa. \nObrigado por utilizar!");
+						break;
+						
+					default:
+						System.out.println("Um erro inesperado aparenta ter ocorrido.");
+						System.out.println("Por favor, reincie o programa e tente novamente!");
+						break;
+				}
+				
+			}
+			
+		}
+		catch (java.util.InputMismatchException erro) { // entradas invalidas
+			System.out.println("Entrada invalida. Por favor, digite apenas numero! \nCódigo do erro:" + erro.getMessage());
+			sc.nextLine(); // limpar o buffer
+		}
+		
+
+	}	
+}
+
+package Questao_13;
+import java.util.ArrayList;
+
+public class Boletim {
+	
+	ArrayList<Double> Notas = new ArrayList<Double>();
+	
+	
+	// adicionar nota
+	public void addNota(Double nota) {
+		Notas.add(nota);
+	}
+ 	
+	// calcular media
+	public double calcularMedia() {
+		
+		double soma = 0;
+		for (int i=0; i<Notas.size(); i++) {
+			soma += Notas.get(i);
+		}
+		
+		return ( (soma) / Notas.size() );
+	}
+	
+	// verificar maior
+	public double verifMaior() {
+		
+		double maior = 0;
+		for (int i=0; i<Notas.size(); i++) {
+			if (Notas.get(i) > maior) {
+				maior = Notas.get(i);
+			}
+		}
+		return maior;
+	}
+	
+	// verificar menor
+	public double verifMenor() {
+			
+		double menor = 10;
+		for (int i=0; i<Notas.size(); i++) {
+			if (Notas.get(i) < menor) {
+				menor = Notas.get(i);
+			}
+		}
+		return menor;
+	}
+		
+	// imprimir notas
+	public boolean imprimirNotas() {
+		
+		for (int i=0; i<Notas.size(); i++) {
+			System.out.println("Nota " + (i+1) + ": " + Notas.get(i) + ", ");
+		}
+		return true;
+	}
+	
+}
