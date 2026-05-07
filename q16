@@ -1,0 +1,209 @@
+package Questao_16;
+import java.util.Scanner;
+
+public class Main {
+	
+	private static Scanner sc;
+	
+	public static void main(String[] args) {
+		
+		sc = new Scanner(System.in);
+		Biblioteca b1 = new Biblioteca();
+		
+		int opcao = -1;
+		
+		System.out.println("Bem vindo a Biblioteca Online!\n");
+		
+		try {
+			while (opcao != 0) {
+				
+				System.out.println("O que desa fazer?"
+						+ "\n1. Registrar um Novo Livro."
+						+ "\n2. Remover um Livro."
+						+ "\n3. Procurar por um Exemplar."
+						+ "\n4. Mostrar acervo completo."
+						+ "\n0. Finalizar.");
+				
+				opcao = sc.nextInt();
+				
+				switch(opcao) {
+					case 1: // adicionar livro
+						
+						System.out.println("Qual o nome do Livro a ser adicionado?");
+						System.out.print("Nome: ");
+						String nome = sc.nextLine();
+						
+						while ( nome.isEmpty() ) {
+							System.out.println("O nome não pode ser vazio!");
+							System.out.print("Nome: ");
+							nome = sc.nextLine();
+						}
+						
+						System.out.println("Qual o ISBN (codigo unico) do Livro a ser adicionado?");
+						System.out.print("ISBN: ");
+						String isbn = sc.nextLine();
+						
+						while ( isbn.isEmpty() ) {
+							System.out.println("O ISBN não pode ser vazio!");
+							System.out.print("ISBN: ");
+							isbn = sc.nextLine();
+						}
+						
+						b1.adicionarLivro(isbn, nome);
+						System.out.println("Livro adicionado ao Acervo!");
+						break;
+						
+					case 2: // remover um livro
+							System.out.println("Para remover um Livro é necessario saber seu ISBN (codigo unico).");
+							System.out.println("Você sabe o codigo do livro que deseja remover? (1 - Sim | 0 - Não)");
+							
+							int subOpcao = sc.nextInt();
+							if (subOpcao == 0) {
+								break;
+							}
+							else if (subOpcao == 1) {
+								
+								System.out.println("Qual o ISBN do livro que você deseja remover?");
+								System.out.print("ISBN: ");
+								isbn = sc.nextLine();
+								
+								while ( isbn.isEmpty() ) {
+									System.out.println("O codigo ISBN não pode ser vazio.");
+									System.out.print("ISBN: ");
+									isbn = sc.nextLine();
+								}
+								
+								if ( b1.verificarLivro(isbn) == true ) {
+									System.out.println("O Livro " + b1.procurarLivro(isbn) + " foi encontrado e removido do sistema.");
+									b1.removerLivro(isbn);
+								} else {
+									System.out.println("O Livro informado não existe no sistema.");
+								}
+							} else {
+								while (subOpcao != 1 && subOpcao != 0) {
+									System.out.println("Por favor, digite uma resposta valida. (1 - Sim | 0 - Não)");
+									System.out.println("Você conhece o ISBN do livro que deseja remover?");
+									System.out.print("Resposta: ");
+									subOpcao = sc.nextInt();
+								}
+							}
+						break;
+						
+					case 3: // procurar livro especifico
+						
+						System.out.println("Qual o ISBN (codigo unico) do livro que deseja procurar?");
+						System.out.print("ISBN: ");
+						isbn = sc.nextLine();
+						
+						while ( isbn.isEmpty() ) {
+							System.out.println("O ISBN não pode ser vazio!");
+							System.out.print("ISBN: ");
+							isbn = sc.nextLine();
+						}
+						
+						if ( b1.verificarLivro(isbn) == true ) {
+							System.out.println("Livro encontrado no sistema: " + b1.procurarLivro(isbn) );
+						} else {
+							System.out.println("Livro não encontrado");
+						}
+						
+						break;
+						
+					case 4: // mostrar tudo
+						
+						b1.mostrarLivros();
+						break;
+						
+					case 0:	// encerrar
+						System.out.println("Finalizando o sistema.\nObrigado por utilizar!");
+						break;
+						
+					default:
+						System.out.println("Um erro desconhecido ocorreu.\nPor favor reinicie o programa e tente novamente!");
+						break;
+				}
+			}
+			
+		}
+		catch (java.util.InputMismatchException erro) { // entradas invalidas
+			System.out.println("Entrada invalida. Por favor, digite apenas numero! \nCódigo do erro:" + erro.getMessage());
+			sc.nextLine(); // limpar o buffer
+		}
+		
+		
+		
+
+	}
+}
+package Questao_16;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Biblioteca {
+
+	HashMap<String, String> livros = new HashMap<>();
+	
+	// metodos
+	// adicionar livro
+	public void adicionarLivro(String isbn, String nome) {
+		livros.put(isbn, nome);
+	}
+	
+	// remover livro
+	public void removerLivro(String isbn) {
+		livros.remove(isbn);
+	}
+	
+	// procurar livro
+	public String procurarLivro(String isbn) {
+		return livros.get(isbn);
+	}
+	
+	// printar todos os livros
+	public void mostrarLivros() {
+		
+		System.out.println("Lista de Livros Registrados:");
+		for ( Map.Entry<String, String> item: livros.entrySet() ) {
+			System.out.println("ISB: " + item.getKey() + " | Nome: " + item.getValue() + "\n");
+		}
+	}
+	
+	// verificar se um livro existe
+	public boolean verificarLivro(String isbn) {
+		
+		if ( livros.containsValue(isbn) == true ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+}
+package Questao_16;
+
+public class Livro {
+
+	private String nome;
+	private String isbn;
+	
+	// construtor
+	public Livro(String nome, String isbn) {
+		this.nome = nome;
+		this.isbn = isbn;
+	}
+	
+	// get & set
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	
+	public String getIsbn() {
+		return isbn;
+	}
+	public void setIsbn(String isbn) {
+		this.isbn = isbn;
+	}
+}
