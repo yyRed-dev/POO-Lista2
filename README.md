@@ -1,6 +1,5 @@
+# Lista de Exercicios 2 [POO]
 Resolução da Lista de Questões n° 2 para o Estudo de Programação Orientada a Objetos
-
-Obs: 1 - 6 (estão sem "try catch")
 
 1. Em um sistema de controle de acesso de um evento, é necessário contar o número
 de pessoas que entram em uma sala. Implemente uma classe Contador em Java,
